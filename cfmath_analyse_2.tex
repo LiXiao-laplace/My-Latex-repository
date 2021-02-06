@@ -1,0 +1,1203 @@
+\documentclass[hyperfer,UTF8,a4paper,12pt]{article}
+\usepackage{tikz,lipsum,lmodern}
+\usepackage[a4paper,top=4cm,bottom=2cm,left=2cm,right=2cm]{geometry}  
+\usepackage{listings} 
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{indentfirst}
+\usepackage{amsfonts}
+\usepackage{ctex}
+\usepackage{titlesec}
+\usepackage{esvect}
+\usepackage{extarrows}
+\usepackage{upgreek}
+\usepackage{esint}
+\usepackage{verbatim}
+\usepackage{latexsym}
+\usepackage{fancyhdr}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}%[hidelinks]可删去标志
+\usepackage[all]{xy}
+\usepackage{ulem}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Li Xiao's Notes}
+\chead{\slshape \leftmark}
+\rhead{\thepage}
+
+\linespread{1.4}
+\setlength{\parskip}{0.2\baselineskip}
+\addtolength{\topmargin}{-54pt}
+\setlength{\oddsidemargin}{0.63cm}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\textwidth}{14.66cm}
+\setlength{\textheight}{24.00cm}
+\makeatletter
+\let\@afterindentfalse\@afterindenttrue
+\@afterindenttrue
+\makeatother
+
+
+\theoremstyle{plain}
+\newtheorem{Thm}{$\mathcal{T}$heorem}
+\newtheorem*{Prf}{$\mathcal{P}$roof}
+\newtheorem*{Lem}{$\mathcal{L}$emma}
+\newtheorem*{Cor}{$\mathcal{C}$orollary}
+\newtheorem*{Prop}{$\mathcal{P}$roposition}
+\newtheorem*{Remark}{$\mathcal{R}$emark}
+\newtheorem{Def}{{$\mathcal{D}$efinition}}[section]
+\newtheorem*{Example}{$\mathcal{E}$xample}
+\newtheorem*{Conj}{$\mathcal{C}$onjecture}
+\newtheorem*{Exercise}{$\mathcal{E}$xercise}
+\newtheorem{Exer}{习题}[section]
+\newtheorem*{Background}{{Background}}
+\newtheorem*{Setting}{{Setting}}
+
+
+
+\title{分析第二学期内容}
+\author{李潇}
+\begin{document}
+
+
+\maketitle
+\author
+\tableofcontents
+\newpage
+\begin{abstract}
+	本课程由梁永祺老师和许金兴老师执教。为中法班培养计划的第二学期课程。
+	
+	我正在学习\LaTeX 中，学到的新的关于\LaTeX 技巧会在这里尝试，所以看起来会有点奇怪。打出这份大纲一方面为了记录学了哪些内容，另一方面为了锻炼我的\LaTeX 水平。
+	
+	还有请忽略我拙劣的英语水平，我只能保证我看得懂，不能保证语法一定正确，所有英语都是我凭感觉写的。
+	由于正在学习法语，所以单词默认翻译法语，见谅。
+\end{abstract}
+\section{拓扑(Topology)}
+\begin{Remark}
+	Click \href{https://en.wikipedia.org/wiki/Topology}{this} to see tpoplogy in wikipedia
+\end{Remark}
+
+\subsection{$ \mathbb{R} $上的拓扑}
+	\begin{Def}[开集(open/ouvert)]
+	称A是开集。
+	要么$ A=\emptyset $,要么$ \forall x\in A,\exists \epsilon>0,s.t.(x-\epsilon,x+\epsilon)\subset A $
+	\end{Def}
+
+
+ \begin{Thm}[$ \mathbb{R} $上的开集结构定理]
+	设A是$\mathbb{R}$上的开集，则存在至多可数个不交的开区间$(a_i,b_i) $,
+	使 $ A=\bigcup\limits_{i=1}^{\infty}(a_i,b_i)$
+ \end{Thm}
+
+\begin{Def}[闭集]
+ 	称$ A\subset \mathbb{R} $是闭集，若$ \complement A $是开的
+\end{Def}
+
+
+\begin{Example}[Cantor三分集]
+	$ I_1=[0,1] \quad I_2=[0,\frac{1}{3}]\cup[\frac{2}{3},1]\quad I_2=[0,\frac{1}{9}]\cup[\frac{2}{9},\frac{1}{3}]\cup[\frac{2}{3},\frac{7}{9}]\cup[\frac{8}{9},1]$
+	$ I_n=\cdots\quad C=\bigcap\limits_{n=1}^{\infty}I_n $是有限并的无穷交，是闭集 
+\end{Example}
+
+\begin{Def}[邻域]
+	$ x\in\mathbb{R}$，称$ V $是$ x $的邻域，若$ \exists \mathcal{O} $为开集，s.t. $ x\in\mathcal{O}\subset V $
+\end{Def}
+
+\begin{Def}[聚点(accumulation point)]
+	$ A\subset\mathbb{R} $,称$ x\in\mathbb{R} $为A的聚点，若$ \forall x$及其邻域$ V $，有$ V\cap A-\{x\}\not=\emptyset $
+\end{Def}
+
+\begin{Thm}
+	闭集含有自己所有的聚点，反之也对。
+\end{Thm}
+\begin{Def}[孤立点]
+	$ x\in\mathbb{R} $称为孤立点，若$ x\in A $但是x不是A的聚点
+\end{Def}
+\begin{Def}[距离]
+	$ \forall x,y\in \mathbb{R} $ that $ d(x,y)=|x-y|$
+\end{Def}
+\begin{Def}
+	几种连续函数的表达方法，$ f:\mathbb{R}\to\mathbb{R},x\in\mathbb{R} $
+	
+	\begin{description}
+		\item[Level 1] $ \forall \epsilon>0,\exists\delta>0,\forall y\in
+	\mathbb{R}\quad $有$\quad |y-x|<\delta\implies|f(x)-f(y)|<\epsilon $
+		\item[Level 2]$ \forall \epsilon>0,\exists \delta>0\quad $有$\quad f(B(x,\delta))\subset B(f(x),\epsilon)  $
+		\item[Level 3]$ \forall f(x) $的邻域V，$ \exists x $的邻域$ V $,使得$ f(W)\subset V $
+	\end{description}
+\end{Def}
+
+
+
+\subsection{一般的拓扑}
+\begin{Def}[拓扑空间]
+	一个集合$ X $和一个由X的子集构成的集合$ \mathcal{O} $,$ \mathcal{O}\subset 2^X $ and satisfy that
+	\begin{description}
+		\item[$ O_1 $] $ \mathcal{O} $中集合的任意并还在$ \mathcal{O} $中 
+		\item[$ O_2 $] $ \mathcal{O} $中集合的有限交还在$ \mathcal{O} $中
+		\item[$ O_3 $] $ \emptyset $与$ X $在$ \mathcal{O} $中
+	\end{description}
+	then 称 $ \mathcal{O} $中的元素为开集，$ (E,\mathcal{O} ) $ is a Topology Space
+\end{Def}
+
+\begin{Example}[平凡拓扑]
+	$ \{X,\mathcal{O}=\{\emptyset,X \}  \} $
+\end{Example}
+\begin{Example}[离散拓扑]
+	$ \{X,\mathcal{O}=2^X \} $
+\end{Example}
+\begin{Example}
+	在$ \mathbb{R} $下$ \mathcal{O}=\{(-\infty,a)|a\in\mathbb{R}\}\cup\{\emptyset,\mathbb{R}\} $
+\end{Example}
+
+\begin{Def}[闭集]
+	称$A\subset E $是闭集，若$ \complement_{E}A $开
+\end{Def}
+
+\begin{Def}[邻域]
+	$ x\in E $,称V为x的邻域，若$ \exists $开集$ \mathcal{O} $,s.t.$ x\in\mathcal{O}\subset V $
+\end{Def}
+
+\begin{Def}[一点处的邻域基]
+	$ \mathcal{V} $是x的所有邻域的集合，称$ \beta\subset\mathcal{V} $是x处的邻域基，若$ \forall V\in\mathcal{V},\exists W\in\beta $s.t.$ W\subset V $
+\end{Def}
+
+\begin{Def}[拓扑基]
+	一族开集$ \{ \omega_i \}_{i\in I} $是拓扑基，若满足以下两个等价条件之一
+	\begin{description}
+		\item[(1)] $\forall x\in\mathbb{X},\exists $a subset of $ \{ \omega_i \}_{i\in I}$ to be a 邻域基 of x
+		
+		\item[(2)]  X中的任何开集，必可写为$ \{ \omega_i \}_{i\in I}$ 中某些元素的并。
+	\end{description}
+\end{Def}
+
+\begin{Def}[生成的拓扑]
+	对于集合$ X $和$ \beta\subset 2^X $,生成的拓扑是包含$ \beta $的最小的拓扑。(需证明存在性和唯一性)
+	\begin{Remark}
+		actually,$ \tau=\{ \bigcup\limits_{\alpha\in\Lambda}\bigcap\limits_{i\in I_\alpha}\omega_i|I_\alpha<+\infty,\omega_i\in\beta \}\cup\{ \emptyset,X \} $
+	\end{Remark}
+\end{Def}
+
+\begin{Def}[Point adhérent]
+	$ A\subset X,x\in X $,x称为A的adhérent点，若$ \forall V $为x的邻域，有$ V\cap A\not=\emptyset $
+\end{Def}
+
+\begin{Def}[聚点]
+	$ A\subset X,x\in X $称为A的聚点，若$ \forall V $是x的邻域，$ V\cap A-\{x\}\not=\emptyset $
+\end{Def}
+
+\begin{Def}[孤立点]
+	$ x\in A $且x不是聚点。
+	\begin{Remark}
+		$ \exists V\ is\ the\ Nbd\ of\ x $ 使得$V\cap A=\{x\}$
+	\end{Remark}
+\end{Def}
+\begin{Def}[闭包]
+	for $ A\subset X $,$\bar{A}$ is the smallest closed set which contains A,包含A的最小闭集
+\end{Def}
+\begin{Remark}
+	$\bar{A}=\bigcap\limits_{\begin{subarray}
+		
+		B \supset A   \\
+		B\textrm{是闭的}
+		\end{subarray}}B  $
+\end{Remark}
+\begin{Def}[导集]
+	$ A'=\{ A\textrm{的聚点} \} $
+\end{Def}
+
+\begin{Def}[集合的内部]
+	包含于A的最大开集
+\end{Def}
+\begin{Def}[集合的边界]
+	$x\in A^* \Leftrightarrow \forall x $的邻域V，$ V\cap A\not=\emptyset$ and $ V\cap\complement A\not=\emptyset $
+\end{Def}
+\subsection{连续映射与同胚}
+\begin{Def}[逐点连续]
+	对于$ f:X\to Y $,$ X,Y $是拓扑空间，称$ f $在$ x_0 $处连续，若$ \forall$ V is a Nbd of $ f(x_0) $,$ \exists $ W is a Nbd of $ x_0 $,s.t.$ f(W)\subset V $
+\end{Def}
+\begin{Def}[连续]
+	for all x in X,f is continuous on x,then f is called continuous on X.
+\end{Def}
+\begin{Remark}
+	f is continuous on $ A\subset X $,but we can't say $ f|_A:A\to Y $ is continuous!
+\end{Remark}
+
+\begin{Thm}
+	对于$ f:X\to Y $,$ X,Y $是拓扑空间,以下等价。
+	\begin{description}
+		\item[(1)] f连续
+		\item[(2)] $\forall $开集$ \mathcal{O}\subset Y $,$ f^{-1}(\mathcal{O})$ 是开集
+		\item[(3)] $\forall $闭集$ \mathcal{F}\subset Y $,$ f^{-1}(\mathcal{F})$ 是闭集
+		\item[(4)] $ \forall A\subset X ,f(\bar{A})\subset\overline{f(A)}$
+	\end{description}
+\end{Thm}
+\begin{Prop}
+	连续函数的复合还是连续函数
+\end{Prop}
+
+\begin{Def}[\textbf{同胚}]
+	$ f:X\to Y $是连续，且$ \exists g:Y\to X $连续,s.t. $ f\circ g=g\circ f=id $，则称$ f $是X到Y的同胚，$ g $是$ f $的逆。
+\end{Def}
+
+\begin{Remark}
+	保持开集的双射,拓扑空间的同构
+	\[  (X,\mathcal{O}_X)\leftrightarrow(Y,\mathcal{O}_Y)   \]
+\end{Remark}
+
+\begin{Def}[拓扑的粗细]
+	对于X有拓扑$ \tau_1 $,$\tau_2$,若$ \tau_1\subset\tau_2 $,则称$ \tau_1 $比$ \tau_2 $细。
+\end{Def}
+
+\subsection{拓扑下的极限}
+
+\begin{Def}[Hausdorff性质，T2分离性质，Séparé]
+	拓扑空间E称为是séparé,若$ \forall x,y\in E $ $ x\not=y $ $ \exists x,y $各自的邻域$ V,W $,且$ V\cap W=\emptyset $
+\end{Def}
+
+\begin{Thm}
+	E是Hausdorff的，则E中的序列至多有一个极限
+\end{Thm}
+
+\begin{Example}[$ \mathbb{R} $中的余可数拓扑]
+	没有分离性质，所以序列会有多个极限
+\end{Example}
+
+\begin{Remark}
+	对于$ x\in\bar{A} $与$ x $是A中元素的极限之间的关系，可参考
+	\begin{quote}
+		\href{wikipedia.org}{Baire纲性定理}
+	\end{quote}
+\end{Remark}
+
+\begin{Def}[序列的adhérent point]
+	for $(a_n)_{n\in\mathbb{N}} $,若$ a\in E $,称为adhérent point,若$ \forall  $a的邻域V，$ \exists i_0 $,s.t.$ \forall i>i_0 $,$ a_i\in V $
+\end{Def}
+\begin{Remark}
+	可以理解为子列极限
+\end{Remark}
+\begin{Prop}
+	A是$(a_n)_{n\in\mathbb{N}} $的所有adhérent point,则$ A $闭，且$ A=\bigcap\limits^{\infty}_{n=1} \bar{A_n} $,其中$ A_n=\{ a_i|i\geq n \} $
+\end{Prop}
+
+\begin{Exercise}
+	Set of velours d'adhérence 是闭集，那么是否$ \mathbb{R} $中所有闭集都可以写成某个数列的附着点集？
+\end{Exercise}
+
+\begin{Def}[滤子基(base de filtre)与极限过程]
+	称集合E的子集$ \beta $为滤子基，若$ \forall B_1,B_2\in\beta\quad B_3\in\beta $s.t.$ B_3\subset B_1\cap B_2 $,且$ \beta $中的元素均非空集。
+\end{Def}
+\begin{Example}
+	$ E=\mathbb{R} ,\beta=\{ (x,+\infty)|x\in\mathbb{R} \}$
+\end{Example}
+\begin{Example}
+		$ E=\{(\pi,\epsilon)\} $分割及选点，$ \beta=\{(\pi,\epsilon)|\ ||\pi||<\epsilon  \} $
+\end{Example}
+
+\begin{Def}[\textcolor{red}{沿滤子基的收敛}]
+	$ f:X\to Y $,Y is a Topo-Space,$ \beta $ is a base de filtre on X........
+\end{Def}
+
+
+\subsection{乘积拓扑}
+\begin{Def}[乘积拓扑抽象定义]
+	在两个拓扑空间$ E_1,E_2 $上，要定义$ E_1\times E_2 $上的拓扑。
+	\begin{align*}
+		&\pi_1: E_1\times E_2 \to E_1 \\
+		&\pi_2: E_1\times E_2 \to E_2
+	\end{align*}
+	称$ E_1\times E_2 $上使$\pi_1,\pi_2$连续的最粗的拓扑为乘积拓扑
+\end{Def}
+\begin{Def}[乘积拓扑构造定义]
+	由形如$ \omega_1\times\omega_2 $的初等开集生成的拓扑称为乘积拓扑
+\end{Def}
+\begin{Def}[开映射]
+	开集的像是开集
+\end{Def}
+\begin{Prop}
+	$ E_1,E_2 $是两个拓扑空间，$ A_1\subset E_1\quad A_2\subset E_2 \quad$,$A_1\times A_2$作为$ A_1,A_2 $的乘积拓扑和作为$ E_1\times E_2 $的子空间拓扑是一样的
+\end{Prop}
+\begin{Prop}[结合率]
+	$ (E_1\times E_2)\times E_3=E_1\times(E_2\times E_3) $
+\end{Prop}
+\begin{Thm}
+	$ X,E_1,E_2 $ is topology space,and $ f:X\to E_1\times E_2 $,then $ f $连续$ \Leftrightarrow $ $\pi_1\circ f  $与$\pi_2\circ f$均连续 
+\end{Thm}
+\begin{Prop}
+	$ E_1,E_2 $ is Separe(Hausdorff),then $E_1\times E_2$ is Hausdorff
+\end{Prop}
+
+\subsection{紧性}
+\begin{Def}[紧compact]
+	称拓扑空间$ E $是紧的，若由开覆盖，则有有限子覆盖。i.e.$ E\subset\bigcup\limits_{\alpha\in I}\mathcal{O}_\alpha\quad \mathcal{O}\alpha$是开集,then $ \exists \alpha_1,\cdots,\alpha_m $s.t. $ E\subset\bigcup\limits_{i=1}^m \mathcal{O}_{\alpha_i} $
+\end{Def}
+\begin{Remark}
+	法语书中Compact=有限覆盖+Hausdorff,Quasi-Compact=有限覆盖
+\end{Remark}
+
+\begin{Def}[列紧(Sequentially Compact)]
+	E的任何点列有收敛子列
+\end{Def}
+
+\begin{Def}[极限点紧(Limit Point Compact)]
+	任何无穷点集有极限点
+\end{Def}
+
+\begin{Prop}
+	紧集的闭子集是紧集
+\end{Prop}
+\begin{Prop}
+	紧集在连续映射下的像是紧集
+\end{Prop}
+\begin{Prop}
+	分离集的紧子集是闭集
+\end{Prop}
+
+\begin{Prop}
+	$ f:X\to\mathbb{R} $连续，X紧$ \implies $$ f $有界\& 取到最值
+\end{Prop}
+
+\begin{Thm}
+	若$ (X,d) $是度量空间，则紧$ \Leftrightarrow $列紧
+\end{Thm}
+
+\begin{Prop}
+	$ \mathbb{R}^n $中，有界闭集$ \Leftrightarrow $ 紧集
+\end{Prop}
+
+\subsection{连通性}
+\begin{Def}[分解]
+	E是一个Topo空间，$ X,Y\subset E $,$ X\sqcup Y=E $,则称X，Y是一个分解
+\end{Def}
+
+\begin{Def}[连通]
+	若不存在非空开分解，则称E是连通的
+\end{Def}
+
+\begin{Prop}
+	拓扑空间E，$ X\subset E $,$ A\subset E$连通，若$ A\cap X\not=\emptyset\ A\cap\complement X\not=\emptyset $，则$ A\cap X^*\not=\emptyset $
+\end{Prop}
+
+\begin{Thm}
+	设$ (A_\alpha)_{\aleph\in I} $是一族E中的连通集，若$ \bigcap\limits_{\alpha\in I}A_{\alpha}\not=\emptyset $则$  \bigcup\limits_{\alpha\in I}A_{\alpha} $连通
+\end{Thm}
+
+\begin{Thm}
+	A连通，若$ A\subset B\subset \bar{A} $,则B连通
+\end{Thm}
+
+\begin{Example}
+	$\Gamma: f(x)=sin\frac{1}{x},x\in \left(0,1\right] $,则$ \Gamma\cup\{0\}\times\left[0,1\right] $连通
+\end{Example}
+
+\begin{Prop}
+	X 连通，$ f:X\to Y $连续，则$f(x)$的图像是连通的
+\end{Prop}
+
+\begin{Def}[区域domain]
+	连通开集
+\end{Def}
+
+\begin{Def}[连通分支]
+	$ x\in E $,C(x)为所有含x的连通集的并。
+\end{Def}
+
+\begin{Def}[局部连通]
+	称E在x上局部连通，若存在一族连通集作为x点的邻域基
+\end{Def}
+
+\begin{Def}[道路连通]
+	称E是path connected,若$ \forall a,b\in E $,$\exists$连续$ f:[0,1]\to E $,$ f(0)=a,f(1)=b $
+\end{Def}
+
+\begin{Thm}
+	道路连通$\implies$连通
+\end{Thm}
+
+\subsection{分离性、可数性、Urysohn引理}
+\begin{Def}[分离性]
+	\hspace*{\fill}
+	\begin{description}
+		\item[T1]$ \forall x\not=y $,$\exists V $是x的邻域,s.t.$ y\not\in V$
+		\item[T2]$ \forall x\not=y $,$\exists V $是x的邻域，$\exists W $是y的邻域,s.t.$ V\cap W=\emptyset$
+		\item[T3]$ \forall x\in E $,闭集$ A\subset E $，有$ x\in V\quad A\subset W $, s.t.$ V\cap W=\emptyset$
+		\item[T4] 闭集$ A,B\subset E $,$ A\cap B\not=\emptyset $,$ \exists  $分别的邻域$ U,V $ s.t.$ U\cap V=\emptyset$
+	\end{description}
+\end{Def}
+\begin{Prop}
+	度量空间是T1,T2,T3,T4空间
+\end{Prop}
+
+\begin{Thm}
+	紧的Hausdorff$ \implies $ T4
+\end{Thm}
+\begin{Def}[可数性]
+	\hspace*{\fill}
+	\begin{description}
+		\item[可分的(Seperable)] E有可数稠密集
+		\item[第一可数(C1)]	$ \forall x\in E $,有可数邻域基
+		\item[第二可数(C2)]	E有可数开集基
+	\end{description}
+\end{Def}
+
+\begin{Prop}
+	$ C1\implies C2\implies  $可分
+\end{Prop}
+
+\begin{Thm}
+	Seperable+度量空间$ \implies $ C2
+\end{Thm}
+
+\begin{Thm}[Urysohn引理]
+	设E是T4，设A,B是其中不交闭集，则存在连续函数$ f:E\to\mathbb{R} $,使$ f|_A\equiv 0,f|_B\equiv 1$
+\end{Thm}
+
+\begin{Thm}[Tietze扩张引理]
+	E是T4，$ A\subset E$是闭集，$ f:A\to\mathbb{R} $连续,则存在$ \tilde{f}:E\to\mathbb{R} $连续，且$ \tilde{f}|_A=f $
+\end{Thm}
+
+\begin{Lem}
+	X,$ A_1,A_2$闭子集，且$ A_1\cup A_2=X $,则
+	$ f|_{A_1} $和$ f|_{A_2} $均连续
+	$\implies $f在X上连续
+\end{Lem}
+
+\section{赋范向量空间(Normed Vector Space)}
+\subsection{赋范向量空间}
+\begin{Setting}
+	$ \mathbb{K}=\mathbb{R},\mathbb{C} $
+\end{Setting}
+\begin{Def}[范数]
+	E is a $ \mathbb{K} $-vecteur space,$ N:E\to\mathbb{R}^+ $，称N是一个范数，若
+	\begin{description}
+		\item[齐次性]  $ \forall (E,\lambda)\in E\times\mathbb{K}\quad N(\lambda x)=\lambda N(x) $
+		\item[三角不等式]$ N(x+y)\leq N(x)+N(y) $
+		\item[分离性] $ N(x)=0\implies x=0 $
+	\end{description}
+\end{Def}
+
+\begin{Def}[内积]
+	双线性型$ E\times E\to\mathbb{R} $且满足对称性和正定性
+\end{Def}
+\begin{Prop}
+	内积诱导范数，范数诱导距离
+\end{Prop}
+
+\begin{Def}[完备的]
+	称度量空间$ (E,d) $是完备的，若任何柯西列在E中收敛
+\end{Def}
+
+\begin{Prop}
+	X是紧拓扑空间，$ (C^0(X,\mathbb{R}),||\cdot||_\infty) $是完备的
+\end{Prop}
+
+\begin{Def}[赋范向量子空间]
+	F称为$ (E,||\cdot||) $的子空间，若F是E的向量子空间，且$ (F,||\cdot||) $也是赋范向量空间
+\end{Def}
+
+\begin{Def}[乘积空间]
+	E,F是两个赋范向量空间,他们的乘积空间为\[ (E\times F,||(x,y)||=max\{||x||_E,||y||_F \}) \]
+\end{Def}
+
+\begin{Def}[控制和可忽略]
+	设$ (a_n)_{n\in\mathbb{N}} $,$ (b_n)_{n\in\mathbb{N}} $是赋范向量空间E中的两个点列，称a被b控制，若$ \exists C ,\forall n\in\mathbb{N}  ||a_n||\leq C||b_n||$,记作$ a=O(b) $
+
+	称a关于b可忽略，若$ \forall \epsilon\ge 0,\exists N\in\mathbb{N},\forall n\ge N,||a_n||\leq\epsilon ||b_n|| $，记为$ a=o(b) $
+\end{Def}
+
+\begin{Def}[模的等价]
+	称$ N_1,N_2 $是等价的，若他们可以相互控制
+\end{Def}
+\begin{Remark}
+	等价的模$ \Leftrightarrow $诱导相同的拓扑
+\end{Remark}
+
+
+\begin{Thm}
+	$ \mathbb{K}^n $上所有模等价
+\end{Thm}
+
+\subsection{赋范向量空间上的函数}
+
+\begin{Def}[]
+	$ f:A\to F $,分类定义f在a点的极限为l，$ a\in\overline{\mathbb{R}},l\in\overline{\mathbb{R}} $
+\end{Def}
+
+\begin{Remark}
+	不紧的拓扑$\to$紧的拓扑，用来定义极限
+\end{Remark}
+
+\begin{Prop}[连续延拓]
+	$ f:A\to F $,F在A上连续，若$ a\in\overline{A}\setminus A $,若f在a有极限l，则$ \tilde{f}:A\cup\{a\}\to F $连续
+\end{Prop}
+
+\begin{Def}[函数极限的比较]
+	$ E,F  $ is normed vector space,A$\subset$E,a is an adherent point,$ f,g:A\to F $,$ f={}_a O(g) $ and $ f={}_a o(g)$,mean f被g控制，f关于g可忽略
+\end{Def}
+
+\begin{Prop}[极限的运算]
+	线性性，标量积，倒数的极限，复合的极限
+\end{Prop}
+
+\subsection{紧集上的连续函数}
+\begin{Def}[一致连续]
+	$ f:(X,d)\to(F,\tilde{d}) $一致连续，$ \forall\epsilon\ge0\exists\delta\ge0\forall x\in A\ \forall y\in B(x,\delta)\cap A \quad ||f(x)-f(y)||\le\epsilon$
+\end{Def}
+
+\begin{Thm}[紧集上的连续是一致连续]
+	$ A\subset E $是紧集，$ f:A\to F $连续,则$ f $一致连续
+\end{Thm}
+
+\begin{Thm}
+	$ f:E\to F $线性，则$ f $连续$\Leftrightarrow$$ \exists C>0 $s.t.$ \forall x\in E,\|f(x)\|\leq C\|x\|  $
+\end{Thm}
+
+\begin{Prop}
+	若E有限维，则任何线性映射连续(无穷维不对!)
+\end{Prop}
+
+\begin{Prop}
+	多线性映射$ f:E_1\times E_2\times\cdots\times E_p\to \mathbb{F} $,$ E_i $均为有限维的，则f连续，且$ \|f(x_1,\cdots,x_p)\|\leqslant\|x_1\|\cdots\|x_p\| $
+\end{Prop}
+
+\begin{Def}[norme sous-multiplication]
+	称模$ \|\cdot\| $ est sous-multiplication,如果$ \forall x,y\in E $,$ \|x\cdot y\|\leqslant\|x\|\|y\| $
+\end{Def}
+
+\begin{Thm}
+	有限维赋范代数，有norme sous-multipilication
+\end{Thm}
+\begin{Prf}
+	since $ \|x\times y\|\leqslant C\|x\|\|y\| $,定义$ N(x)=C\|x\| $即可。
+\end{Prf}
+
+\begin{Cor}
+	$ M_n(\mathbb{K}) $上有算子模
+\end{Cor}
+
+
+\section{级数}
+
+\subsection{数项级数}
+    1.正项级数的收敛
+
+    2.交错级数
+
+    3.级数的结合性与交换性
+
+    4.级数的积
+
+
+\subsection{NVS级数}
+    1.Thm:有限维的$\mathbb{K}$-NVS在任意模下完备
+
+    2.部分和与余项，telescope
+
+    3.Thm:E是有限维的NVS，若$\sum\|u_n\Vert$收敛，则$ \sum u_n $收敛
+
+    4.定义矩阵的$\quad exp(A)=\sum\limits_{n\ge 0} \frac{1}{n!}A^n$和$\quad \frac{1}{I-A}=\sum\limits_{n\ge 0}A^n $
+
+
+\subsection{关于收敛速度}
+1.$ \sum u_n\ \sum v_n $均收敛，且$ v_n $非负则
+\[\begin{cases}
+ \textrm{若}\quad u_n=O(v_n) \quad\textrm{则} \ R_n(u)=O(R_n(v))  \\
+
+ \textrm{若}\quad u_n=o(v_n) \quad\textrm{则} \ R_n(u)=o(R_n(v)) \\
+
+ \textrm{若}\quad u_n\sim v_n\ \ \qquad\textrm{则} \ R_n(u)\sim R_n(v)
+\end{cases}
+\]
+2.$ \sum u_n\ \sum v_n $均发散，且$ v_n $非负则
+$\begin{cases}
+\textrm{若}\quad u\,_n=O(v_n)   \quad\textrm{则}  \ S_n(u)=O(S_n(v))\\
+\textrm{若}\quad u_n=o(v_n)     \quad\textrm{则}  \ S_n(u)=o(S_n(v))\\
+\textrm{若}\quad u_n\sim v_n\ \ \qquad\textrm{则} \ S_n(u)\sim S_n(v)\\
+\end{cases}$
+
+\subsection{回到数项级数}
+1.定义$ (a_i)_{i\in I}\quad a_i\in \mathbb{R}^+ $为\textbf{可和}的，若对，则$ \{\sum\limits_{i\in J} a_i|\forall J\subset I\textrm{有限子集}\}$有界
+
+2.在$ \mathbb{R} $上可和，即正部和负部分别可和，在$ \mathbb{C} $上可和，即实部和虚部分别可和
+
+\textbf{注}：若$ (a_i)_{i\in I} $为可和的,则I只有可数个不为0，故不妨设I为$\mathbb{N}$
+
+3.Thm:若$ (a_i)_{i\in I} \quad (b_i)_{i\in J} $均为可和的，则$ (\sum\limits_{i\in I} a_i )(\sum\limits_{i\in J} b_i )=\sum\limits_{(i,j)\in I\times J} a_ib_j $
+
+4.Dirichlet积：$\sum a_n\ \sum b_n$绝对收敛，$ C_n=\sum\limits_{d|n} a_db_{\frac{n}{d}}$
+则有$ \sum C_n $绝对收敛，且$ (\sum\limits_{n=1}^{\infty} a_n )
+(\sum\limits_{n=1}^{\infty} b_n )=
+\sum\limits_{n=1}^{\infty} C_n $
+
+
+5.N(n)表示n的因子个数，当$ \alpha >1$时，$ \sum\limits_{n=1}^{\infty}\frac{N(n)}{n^\alpha}=
+ \sum\limits_{n=1}^{\infty}\sum\limits_{p\cdot q=n}\frac{1}{p^\alpha}\cdot\frac{1}{q^\alpha}
+ =\zeta(\alpha)^2$
+
+6.$ \varphi(n) $是欧拉函数，当$ \alpha >2$时，$ \sum\limits_{n=1}^{\infty}\frac{\varphi(n)}{n^\alpha}=\frac{\zeta(\alpha-1)}{\zeta(\alpha)} $
+
+$ \sum\limits_{n=1}^{\infty}\frac{\varphi(n)}{n^\alpha}
+\sum\limits_{n=1}^{\infty}\frac{1}{n^\alpha}= 
+\sum\limits_{n=1}^{\infty}\sum\limits_{n=1}^{\infty}\frac{\varphi(n)}{m^\alpha\cdot n^\alpha}
+=\sum\limits_{w=1}^{\infty}\sum\limits_{n|w}\frac{\varphi(n)}{w^\alpha}=
+\sum\limits_{w=1}^{\infty}\frac{w}{w^\alpha}=\zeta(\alpha-1)$
+
+7.$ (p_n){n\in\mathbb{N}} $为素数列，定义$ A_N=\{n\in\mathbb{N},n\textrm{的素因子属于}\{p_1,\cdots p_N\} \} $，有$ A_1\subset A_2\subset\cdots $,$ \bigcup\limits_{n=1}^{\infty}A_n=\mathbb{N} $
+
+$\prod\limits_{i=1}^{N}\frac{1}{1-\frac{1}{p^\alpha}}=
+\sum\limits_{n\in A_N}\frac{1}{n^\alpha}$,进而有$ \prod\limits_{i=1}^{\infty}\dfrac{1}{1-\frac{1}{p^\alpha}}=\zeta(\alpha) $
+
+\subsection{函数列}\hspace*{-2em}
+1.简单收敛(pointwise convergence),逐点收敛(convergence simple)
+
+2.简单收敛的一些性质：保持加法和序关系，但不能保持连续性、有界性、可积性、可导性(就算可积或可导，也没有性质)
+
+3.一致收敛，内闭(紧)一致收敛，在A所有点附近一致.Thm:所有点附近一致$ \Leftarrow $内闭一致
+
+\textbf{注}：一致收敛可以看作是$ \Vert\cdot\Vert_\infty $下的收敛，因此一致收敛有Cauchy表述
+
+4.Thm:双极限定理(一致收敛与极限号的交换问题)：
+
+$ f:A\to F \ F$完备，a是A的adhérent point，$ f_n:A\to F $一致收敛，$ \lim\limits_{a}f_n=\ell_n $则：$ \lim\limits_{n\to\infty}\ell_n$和$\lim\limits_{a}f $存在且相等
+
+5.例：$\zeta(z)$在$ \{z\in \mathbb{C}| Re(z)>1 \} $上内闭一致
+
+6.一致收敛与积分的关系(极限号交换问题)：$ f_n:[a,b]\to\mathbb{K} $连续且一致收敛，则$ \lim\limits_{n\to\infty}\int\limits_{[a,b]}f_n=\int\limits_{[a,b]}\lim\limits_{n\to\infty}f_n $
+
+7.一致收敛和求导的关系：(没有简单的关系)
+
+Thm:(对多元微积分也对)$ f_n $简单收敛到$ f $，$ f_n$有连续的导数$ f_n' $,且$ f_n' $一致收敛，则有$ f $可导，而且$f'=\lim\limits_{n\to\infty}f_n'  $
+
+向$ C^K $推广：$ \forall i\in[0,k-1] f_n^{(i)} $简单收敛，$   f_n^{(K)}$一致收敛，则$ f\in C^K $并且$ f^{(i)}(x)=\lim\limits_{n\to\infty}f_n^{(i)}(x) $对固定的x
+
+补充：Peano 曲线：存在连续满映射$ f:[0,1]\to\mathbb{R}^2 $
+\subsection{函数项级数}\noindent
+1.$ \sum u_n\ u_n:A\to F\ $简单收敛，收敛域
+
+2.一致收敛
+
+3.正规收敛(converger Normale)$ \begin{cases}
+u_n \textrm{有界}
+
+\textrm{数项级数}\sum\limits_{n\ge 0}N_\infty(u_n)\textrm{收敛}
+\end{cases} $
+
+\textbf{注}：M判别法，优级数，Weiertrass判别法：(数项级数)Thm:$ \sum a_n $数项，正项，收敛，若$|u_n|\le a_n$则$ \sum u_n $收敛
+
+Thm:$ \sum u_n $正规收敛，则$ \sum u_n $一致收敛(证明用一致收敛的Cauchy表述)
+
+例子：$ \zeta(z) $在$ \{z\in \mathbb{C}| Re(z)>1 \} $每点附近都正规收敛
+
+Dirichlet判别法：$ \sum\limits_{n\ge 1} a_n(x) $一致有界，$ b_n(x) $单调一致趋于0
+
+Abel判别法:$\ \sum a_n(x) $一致收敛，$ b_n(x) $单调一致有界,则$ \sum a_n(x)b_n(x)$一致收敛
+
+4.一致收敛级数的性质：保持连续、逐项积分、逐项求导(需要$ \sum u_n' $连续一致收敛)
+
+例子：$ M_n(\mathbb{K})\ NVS\ $:$ exp(tM)=\sum\limits_{n\ge 0}\frac{1}{n!}(tM)^n \ t\in \mathbb{K}$则$ \frac{d}{dt}(exp(tM))=M\cdot exp(tM) $
+
+5.研究$ \sum u_n $的渐进行为
+\subsection{大定理}
+\begin{Def}[等度连续]
+	设X上有一族连续函数$ \{f_\alpha:\alpha\in I \} $称为是等度连续的，若$ \forall\epsilon>0,\exists\delta>0,\forall\alpha\in I,\forall x,y\in X\quad |x-y|<\delta\implies|f_\alpha(x)-f_\alpha(y)|<\epsilon $
+\end{Def}\noindent
+\textbf{Weierstrass定理}:设$ f $是[0,1]上的连续$ \mathbb{R} $值函数，则$ \forall \epsilon $,存在多项式$ g\in\mathbb{R}[x] $,使$ \Vert f-g \Vert<\epsilon $
+
+\textbf{Stone-Weierstrass定理}:$X紧$,$ \mathfrak{B}\subset C(X)$是一个分离X的代数,则$ \mathfrak{B} $ 在$ (C(X),\Vert\cdot\Vert_\infty) $中稠密
+
+\textbf{Ascoli-Arzela定理}：X是紧的度量空间，若$ (f_n)_{n\in\mathbb{N}} $一致有界且等度连续，则$ f_n $有一致收敛的子列
+
+\section{幂级数}
+\begin{Def}[幂级数]
+	复数列$ (a_n)_{n\in\mathbb{N}} $对应的幂级数是函数项级数$ \sum\limits u_n $,其中$f:\begin{array}[t]{ccc}\mathbb{C} &\longrightarrow &\mathbb{C}\\ z &\longmapsto&a_nz^n\end{array} $
+\end{Def}
+
+\begin{Thm}[Abel引理]
+	设$ (a_n)_{n\in\mathbb{N}} $,$ z_0\in\mathbb{C} $,$ \sum a_nz_0^n $有界,则$ \forall z\in\mathbb{C},|z|<|z_0| $,级数$ \sum a_nz^n $绝对收敛
+\end{Thm}
+
+\begin{Remark}
+	$ D_O(0,r)=\{ z\in\mathbb{C} , |z|<r \} $$ \quad $$ D_F(0,r)=\{ z\in\mathbb{C} , |z|\leqslant r \} $
+\end{Remark}
+\begin{Def}[收敛半径]
+	$R=sup\{ r\in\mathbb{R}^+,(|a_n|r^n)\textrm{有界} \}$
+\end{Def}
+
+\begin{Prop}
+	$ R^{-1}=\limsup\sqrt[n]{|a_n|} $
+\end{Prop}
+
+\begin{Thm}[D'Alenbert判别法]
+	if $ \exists q<1 $,s.t. $ \frac{a_{n+1}}{a_n}<q $则收敛
+\end{Thm}
+
+
+\begin{Prop}
+	$ \sum a_nz^n $,$ \sum b_nz^n $ 半径分别为$ R_a,R_b $,则$ \sum (a+b)_nz^n $ 半径$ R\geqslant min\{R_a,R_b\} $
+\end{Prop}
+
+\begin{Def}[Cauchy乘积]
+	$ \sum a_nz^n $,$ \sum b_nz^n $ 半径分别为$ R_a,R_b$,$ c_n=\sum\limits_{k=0}^n a_kb_{n-k} $,称$ \sum c_nz^n $为Cauchy乘积,且$ R_c\geqslant min\{R_a,R_c\} $
+\end{Def}
+
+\begin{Prop}[一致收敛]
+	$ \sum a_nz^n $ 在$ D_F(0,R) $上内闭一致收敛，对于实数的情况，$ \sum a_nt^n $ 在端点处收敛则必定一致收敛。
+\end{Prop}
+\begin{Cor}
+	设$ \sum a_nz^n $的和函数f，在$ D_O(0,R) $上连续。对于复数的情况，还有$\forall 0<r<R$
+	\[a_n=\frac{1}{2\pi r^n}\int_{0}^{2\pi}f(re^{i\theta})e^{-in\theta} d\theta \]
+\end{Cor}
+
+\begin{Prop}
+	$\mathbb{K}=\mathbb{R} $时，$ \sum a_nt^n $可逐项求导、逐项积分
+\end{Prop}
+
+\begin{Def}[$ f $的Taylor级数]
+	$ \sum \frac{1}{k!}f^{(k)}(0)x^k $称为Taylor级数
+\end{Def}
+\begin{Remark}
+	Taylor级数未必收敛，就算收敛和函数也未必等于$ f $
+\end{Remark}
+
+\begin{Thm}[Borel引理]
+	任给实数列$ (a_n)_{n\in\mathbb{N}}$,存在一个$ (0,1) $上的光滑函数$ f $,使得$ \frac{1}{n!}f^{(n)}(0)=a_n $
+\end{Thm}
+
+\begin{Def}[复解析]
+	设$ f:U\to C,\exists r>0$ 和幂级数$ \sum a_n(z-z_0)^n $使得$ \forall z\in D_O(z_0,r),f(z)=\sum\limits a_n(z-z_0)^n $
+\end{Def}
+
+\begin{Thm}[幂级数展开的唯一性]
+	设$ \sum a_nz^n $,$ \sum b_nz^n $两个在0附近收敛的幂级数，若有$ z_i\to 0 $使$ \sum\limits_{n=0}^{+\infty}a_nz_i^n $
+\end{Thm}
+
+
+\begin{Thm}
+	f在$ (-a,a) $上$ C^\infty $，若存在$ \rho >0 ,M\in\mathbb{R}^+$,使$ \forall x\in(-\rho,\rho),\forall n\in\mathbb{N} $,$|f^{(n)}|\leqslant \frac{M}{\rho^n}n!$，则f在0点的Taylor级数收敛于f
+\end{Thm}
+
+\section{广义积分(intégrale généralisée)}
+\[ \textrm{反常积分}\langle\begin{array}{ccc}\textrm{区间无界}&\to&\textrm{广义积分}\\
+\textrm{函数无界}&\to&\textrm{瑕积分}\end{array} \]
+
+\begin{Def}[在$ [a,+\infty) $上的积分]
+	$ \int_{a}^{+\infty}f=\lim\limits_{x\to\infty}\int_{a}^{x}f	 $
+\end{Def}
+
+\begin{Prop}[简单的性质]
+	\hspace*{\fill}
+	\begin{itemize}
+		\item $ \int_{a}^{\infty}f $收敛性与a无关
+		\item $ f\geqslant 0 \implies \int_{a}^{\infty}f\geqslant0$
+		\item 单调有界则收敛
+		\item 正值函数可用比较判别法
+	\end{itemize}
+\end{Prop}
+
+\begin{Def}[可积]
+	称$ f $可积，若$ \int_{a}^{\infty}|f| $收敛
+\end{Def}
+
+\begin{Def}[在$ [a,b) $上的积分]
+	$ \int_{a}^{b}f= \lim\limits_{x\to b}\int_{a}^{x}f $
+\end{Def}
+\begin{Prop}[简单的性质]
+	不作赘述
+	\hspace*{\fill}
+	\begin{itemize}
+		\item 线性性
+		\item 区间可加性
+		\item 符号相容性
+		\item 分部积分
+		\item 变量代换
+	\end{itemize}
+\end{Prop}
+
+\begin{Thm}[Dirichlet判别法]
+	$ x\to\int_{a}^{x}f $关于x有界，$ g $单调趋于0，$ \lim\limits_{x\to 0}g=0 $
+	
+\end{Thm}
+
+\begin{Thm}[Abel判别法]
+	$ \int_{a}^{+\infty} $收敛，g单调有界，则$ \int_{a}^{+\infty}fg $收敛
+\end{Thm}
+
+\begin{Prop}[渐近公式]
+	
+\end{Prop}
+
+\begin{Thm}[第二中值定理，mean value]
+	$ f,g \in CM([a,b],\mathbb{R}) $且g单调，则$ \exists\xi\in[a,b] $,s.t.\[ \int_{a}^b fg=g(a)\int_{a}^{\xi}f+g(b)\int_{\xi}^{b}f  \]
+\end{Thm}
+
+
+
+
+\section{常微分方程(ODE)}
+\subsection{一阶线性方程组}
+
+\begin{Setting}[抽象]
+	\begin{align*}
+	\intertext{设a,b均连续}	
+		&a:I\to \mathcal{L}(E)\\
+		&b:I\to E\\
+	\intertext{若存在$ \varphi:I\to E $可导,且满足}
+	&
+	\intertext{则称$\varphi$是一阶线性方程组ODE的解}
+	\end{align*}
+\end{Setting}
+
+\begin{Def}[矩阵形式]
+	\[  \begin{pmatrix}x_1\\x_2\\\vdots\\x_n\end{pmatrix}'=A(t)\begin{pmatrix}x_1\\x_2\\\vdots\\x_n\end{pmatrix}+B(t)   \]
+\end{Def}
+\begin{Prop}[解空间结构]
+	对于方程
+	\[X'(t)=A(t)X(t)+B(t)  \eqno(S)  \]
+	\[X'(t)=A(t)X(t)  \eqno(S_0)  \]
+	$ S_0 $的解是一个向量空间，S的解是一个仿射子空间，$ S=\varphi_p+S_0 $
+	
+\end{Prop}
+\begin{Def}[初值问题，Cauchy问题]
+	\[\begin{cases}
+		\varphi'(t)=a(t)\varphi(t)+b(t)\\
+		x(t_0)=x_0
+	\end{cases}\]
+\end{Def}
+
+\begin{Thm}
+	一阶线性ODE system Cauchy问题解的存在唯一性(用迭代法证明)
+\end{Thm}
+
+\begin{Thm}[常数变易法]
+	已知$ X'(t)=A(t)X(t)  $的一组解是$(\varphi_1,\cdots,\varphi_n) $
+	则$ (\varphi_1,\cdots,\varphi_n) $线性无关
+
+	令$ \varphi=\sum\limits_{i=1}^n\lambda_i(t)\varphi_i(t) $,代入方程得，$ \sum\limits_{i=1}^n\lambda'_i(t)\varphi(t)=B(t) $
+	逐一解出$ \lambda_i $可知非齐次方程的解。
+\end{Thm}
+
+\subsection{线性二阶方程}
+\begin{Setting}
+	\[X''(t)+a_1(t)X'(t)+a_0(t)X(t)=b(t)  \eqno{(E)} \]
+	\[X''(t)+a_1(t)X'(t)+a_0(t)X(t)=0  \eqno{(E_0)} \]
+\end{Setting}
+\begin{Def}[Wronskien行列式]
+	设$ \varphi_1,\varphi_2 $是$ (E_0) $得两个解,定义Wronskien行列式为
+	\[ W_{\varphi_1,\varphi_2}(t)=det\begin{pmatrix}
+	\varphi_1(t) & \varphi_2(t)\\
+	\varphi_1'(t) & \varphi'_2(t)
+	\end{pmatrix}   \]
+\end{Def}
+\begin{Prop}
+	由$ (E_0) $可得，$ W'+a_1(t)W=0 $
+\end{Prop}
+\begin{Remark}
+	由上可知，W一旦在一点为0，则全为0
+\end{Remark}
+\begin{Remark}
+	由W可求，故若知一解，则知另一解。
+\end{Remark}
+
+
+\begin{Prop}[如何求第一个解]
+	\hspace*{\fill}
+	\begin{itemize}
+		\item 找简单函数
+		\item 幂级数法
+		\item 变量代换法
+	\end{itemize}
+\end{Prop}
+
+
+\section{NVS值实变函数的微分和积分}
+
+\begin{Def}[极限]
+	$f:I\to E  $,则$\tau_a(f):\begin{array}[t]{ccc}I\setminus\{a\}&\longrightarrow &E\\t&\longmapsto&\frac{f(t)-f(a)}{t-a}\end{array}  $\\
+	称f在a点可导，若$ \tau_a(f) $在a点有极限,记为$ f'(a)=Df(a)=\lim\limits_{a}\tau_a(f) $
+\end{Def}
+
+\begin{Thm}[有限增量不等式]
+	\[|f(b)-f(a)|\leqslant C\cdot sup\|f'\|\cdot(b-a)    \]
+	其中C依赖于E的维数
+\end{Thm}
+
+\begin{Remark}
+	微分中值定理、Language定理，有限增量定理都因为E中没有大小关系而失效
+\end{Remark}
+
+\begin{Thm}[逼近定理]
+	$ \forall f\in CM([a,b],E) ,\forall\varepsilon>0,\exists $ a step function g,\[ sup||f-g||<\varepsilon \]
+\end{Thm}
+
+\begin{Def}
+	\[\int\limits_{[a,b]}f=\lim\limits_{n\to\infty}\int g_n   \]
+\end{Def}
+
+
+
+\section{Riemann积分}
+\subsection{积分理论}
+\begin{Def}[Riemann可积]
+	称$ f $ 是Riemann可积的，若$ \exists l\in E ,\forall\varepsilon>0,\exists\delta>0\forall[a,b] $的分割$ \pi:a=t_0<t_1<\cdots<t_n=b ,\|\pi\|=max{|t_i-t_{i-1}|}\leqslant\delta,\forall \xi_i\in[t_i,t_{i-1}]$有
+	\[  \|  \sum\limits_{i=1}^nf(\xi_i)(t_i-t_{i-1})  \|<\varepsilon  \]
+\end{Def}
+
+\begin{Def}
+	\begin{align*}
+		\underline{S}(f,\pi)=\sum\limits_{i=1}^n \sup\limits_{[x_{i-1},x_i]}f\cdot |x_i-x_{i-1}|   \\
+		\overline{S}(f,\pi)=\sum\limits_{i=1}^n \inf\limits_{[x_{i-1},x_i]}f\cdot |x_i-x_{i-1}| 
+	\end{align*}
+	
+	\begin{align*}
+		\overline{I}=\sup\limits_{\pi}\underline{S}(f,\pi)   \\
+		\underline{I}=\inf\limits_{\pi}\overline{S}(f,\pi) 
+	\end{align*}
+\end{Def}
+\begin{Lem}
+	\[ \underline{I}=\sup\limits_{\pi}\underline{S}(f,\pi)=\lim\limits_{||\pi||\to0}\underline{S}(f,\pi)   \]
+\end{Lem}
+\begin{Lem}
+	$ f:[a,b]\to\mathbb{R},W=\sup f-\inf f ,\pi'$比$ \pi $细k个点,则
+	\[  \underline{S}(f,\pi')\leqslant\underline{S}(f,\pi)+kW||\pi||   \]
+\end{Lem}
+
+\begin{Thm}
+	f有界，以下等价
+	\begin{description}
+		\item[(1)]$ f:[a,b]\to\mathbb{R} $是Riemann可积 
+		\item[(2)]$\lim\limits_{||\pi||\to0}(\sum\omega_i\Delta x_i)=0$
+		\item[(3)]$ \overline{I}=\underline{I} $
+	\end{description}
+\end{Thm}
+
+\begin{Def}[零测]
+	$ A\subset \mathbb{R} $称为是零测的，
+	若$ \forall\varepsilon>0 $,
+	$ \exists $一列开区间 $ ((a_i,b_i))_{i\in\mathbb{N}} $,
+	使$ A\subset \bigcup\limits_{i=1}^{\infty}(a_i,b_i) $且$\sum |b_i-a_i|<\varepsilon $ 
+\end{Def}
+\begin{Def}[连续点]
+	定义\[ \omega(x,r)=\sup\limits_{I\cap B(x,r)}f-\inf \limits_{I\cap B(x,r)}f\]
+	记\[ \omega(x)=\lim\limits_{r\to0^+}\omega(x,r)  \]
+	x是f的连续点等且仅当$ \omega(x)=0 $
+\end{Def}
+
+\begin{Thm}[Lebesque定理]
+	$ f $Riemann可积$\Leftrightarrow$f的间断点集是零测的
+\end{Thm}
+
+\begin{Thm}
+	$ f_n:[a,b]\to\mathbb{R} $ Riemann可积，$ f_n\rightrightarrows f $,则$ f $也Riemann可积，且$ \int_{a}^{b}|f_n-f|\to 0 $
+\end{Thm}
+
+\begin{Def}[一致可积]
+	称$ f_n:[a,b]\to\mathbb{R} $一致可积，若$ \forall\epsilon>0\exists\delta>0,\forall||\pi||<\delta,\forall\xi_i\in[x_{i-1},x_i] $有\[ |\sum f_n(\xi_i)\Delta x_i-\int_{a}^{b}f_n|<\epsilon \]
+\end{Def}
+\begin{Prop}
+	等度连续$ \implies $一致可积
+\end{Prop}
+\subsection{关于参数}
+
+\begin{Thm}[关于参数的积分]
+	若f连续(条件过强)，则
+	\[\int_{c}^{d}\int_{a}^{b}f(x,y)dxdy=\int_{a}^{b}\int_{c}^{d}f(x,y)dydx \]
+\end{Thm}
+
+\begin{Thm}[参数积分]
+	设$ f $,$ \frac{\partial f}{\partial y} $均在$ [a,b]\times[c,d] $上连续(条件过强)，则$ \varphi(y)=\int_{a}^{b}f(x,y)dx $关于y可导，且\[ \varphi'(y)=\int_{a}^{b}\frac{\partial f}{\partial y}dx \]
+\end{Thm}
+
+\begin{Thm}[含参数的上下限积分]
+		设$ f $,$ \frac{\partial f}{\partial y} $均在$ (a,b)\times[c,d] $上连续(条件过强)
+		$ u,v $在[c,d]$\to(a,b)$可导,则
+	\[ \varphi'(y)=v'(y)f(v(y),y)-u'(y)f(u(y),y)+\int_{u(y
+		)}^{v(y)}\frac{\partial f}{\partial y}(x,y)dx   \]
+\end{Thm}
+
+\subsection{卷积}
+\begin{Def}[卷积]
+	$ \varphi:\mathbb{R}\to\mathbb{R} $,$ \varphi $光滑，当$ |x|>1 ,\varphi(x)=0$,$ f:\mathbb{R}\to\mathbb{R} $连续，令\[ g(y)=\int\limits_\mathbb{R} f(x)\varphi(y-x)   \]
+\end{Def}
+
+
+
+\begin{Thm}
+	设$ f:\mathbb{R}\to\mathbb{R} $连续，$ \varphi_\epsilon=\frac{1}{\epsilon}\varphi(\frac{x}{\epsilon}) $,
+	令\[ g_\epsilon(y)=\int_{\mathbb{R}}f(x)\varphi_\epsilon(y-x) dx   \]
+	则$ \forall x\in \mathbb{R} ,\lim\limits_{\epsilon\to0}g_\epsilon(x)=f(x)    $
+\end{Thm}
+
+
+\subsection{含参变量的反常积分}
+
+\begin{Setting}
+	\[ f:[a,+\infty)\times[\alpha,\beta]\to\mathbb{R} \]
+	\[ \varphi(u)=\int_{a}^{\infty}f(x,u)dx  \]
+\end{Setting}
+
+\begin{Def}[一致收敛]
+	若$ \forall\epsilon>0,\exists A_0>0,\forall u\in[\alpha,\beta] ,\forall A>A_0$
+	\[  |\int_{A}^{\infty}f(x,u)dx |\leqslant\epsilon  \]
+	则称$ \int_{A}^{\infty}f(x,u)dx $关于$ u\in[\alpha,\beta] $一致收敛
+\end{Def}
+
+\begin{Prop}[等价的判定]
+	\[ \eta(A)=\sup\limits_{u\in[\alpha,\beta]}\to 0 (A\to \infty)  \]
+\end{Prop}
+
+\begin{Prop}[Cauchy]
+	$ \forall\epsilon>0,\exists A_0>0,\forall u\in[\alpha,\beta],\forall A_1,A_2>A_0 $
+	\[  |\int_{A_1}^{A_2}f(x,u)dx |<\epsilon  \]
+\end{Prop}
+
+
+\begin{Prop}[Weierstrass判别法]
+	若存在非负的$ F(x) $,使$ \int_{a}^{\infty}F(x)dx $收敛,且
+	\[ \sup\limits_{[\alpha,\beta]}(f(x,u))<F(x) \]
+\end{Prop}
+
+
+\begin{Thm}[Abel判别法]
+	$ \int_{a}^{\infty}f(x,u)dx $一致收敛，$ g(x,u) $作为x的函数单调，$ g(x,u) $关于u,x一致有界，
+	则$ \int_{a}^{\infty}(fg)(u,x)dx $一致收敛
+\end{Thm}
+
+\begin{Thm}[Dirichlet判别法]
+	$ \int_{a}^{A}f(x,u)dx $关于A,u一致有界,$ g(x,u) $固定u作为x的函数单调,当$ x\to \infty $时，g关于u一致趋于0，
+	则$ \int_{a}^{\infty}(fg)(u,x)dx $一致收敛
+\end{Thm}
+
+\begin{Thm}
+	$ f_n,f:[a,\infty)\to\mathbb{R}$,$ \forall M>0,f_n\rightrightarrows f  $ on $ [a,M] $,且广义积分$\int_{a}^{+\infty}f_n  $一致收敛，则$ \lim\limits_{n\to\infty}\int_{a}^{\infty}f_ndx=\int_{a}^{\infty}fdx $
+\end{Thm}
+
+\begin{Prop}[对参数积分]
+	$ \varphi(u):=\int_{a}^{+\infty}f(x,u)dx $关于u一致收敛，则$ \int_{\alpha}^{\beta}\varphi(u)du=\int_{a}^{\infty}(\int_{\alpha}^{\beta}f(x,u)du)dx $
+\end{Prop}
+
+\begin{Prop}[对参数求导]
+	$ f,\frac{\partial f}{\partial u}$
+	连续，$\int_{a}^{\infty}f(x,u)dx$存在，
+	$\int_{a}^{\infty}\frac{\partial f}{\partial u}dx  $关于u一致收敛,则$ \varphi(u) $可导，且$ \varphi'(u)=\int_{a}^{\infty}\frac{\partial f}{\partial u}dx $
+\end{Prop}
+
+\begin{Thm}
+	\begin{align*}
+		&1.f\textrm{在}[a,\infty)\times[\alpha,\infty)\textrm{连续}\\
+		&2.\int_{a}^{\infty}f(x,u)dx\textrm{关于u内闭一致收敛}\\
+		&3.\int_{\alpha}^{\infty}f(x,u)dx\textrm{关于x内闭一致收敛}\\
+		&4.\int_{a}^{\infty}\int_{\alpha}^{\infty}|f(x,u)|dudx\textrm{存在}
+	\end{align*}
+\end{Thm}
+\begin{Remark}
+	“一致性”解决问题的方法随着维数的增加愈发复杂，造成了方法的崩溃，需要其他方法\textbf{控制收敛定理}来解决
+\end{Remark}
+
+
+\section{习题}
+\subsection{}\noindent
+1.设A为$ n\times n $的实对称矩阵(A=$ A^T $)
+
+(1)A的特征值为实数
+
+(2)A可对角化
+
+2.设$ A,B\in M_n(\mathbb{R}) $
+
+$\left.a\right)$:设A,B的特征值为$ \lambda_1(A)\ge\lambda_2(A)\ge\cdots\ge\lambda_n(A)\quad\lambda_1(B)\ge\lambda_2(B)\ge\cdots\ge\lambda_n(B) $
+
+设$ B\ge A\quad (x^TBx\ge x^TAx,\forall x\in \mathbb{R})$,求证：$ \lambda_k(A)\ge\lambda_k(A)\ \forall k $
+
+$\left.b\right)$:设C是对称实矩阵,若$c_{i,i}\ge\sum\limits_{j\not=i}\vert c_{i,j}\vert \ \forall i\quad $求证：$\forall X\in R^n\  X^TCX\ge 0 $
+
+$\left.c\right)$:定义$=max\vert c_{i,j}\vert$,若$ \Vert A-B\Vert\le \frac{\epsilon}{n} $求证：$ \epsilon I\pm (A-B)\ge 0 $
+
+$\left.d\right)$:求证：$ \lambda_k(A) $关于A是Lipschtz的,即$\vert \lambda_k(A)-\lambda_k(B)\vert\le n\vert A-B \vert $
+
+$\left.e\right)$:$ \lambda_k(A) $关于A是否可微?
+
+\subsection{}\noindent
+1.(1):在$ M_n(\mathbb{C}) $中，可对角化矩阵全体稠密
+
+(2):在$ M_n(\mathbb{R}) $中不对
+
+2.设C为赋范向量空间E中的非空紧集,$ f:E\to E $是一个连续的自同态，且$ f(C)\subset C $
+
+$\left.a\right)$:令$ f_n=\frac{1}{n}\sum\limits_{k=0}^{n-1}f^{(k)} $,求证$ f_n $为连续自同态
+
+$\left.b\right)$:求证：存在$ M>0\ s.t.\ \forall y\in f_n(C)  $有$ \Vert f(y)-y\Vert\le \frac{2M}{n} $
+
+$\left.c\right)$:证明f中至少有一个不动点
+
+3.设
+\subsection{}\noindent
+1.设$ (f_n)_{n\in\mathbb{N}}$为有界区间I上取值于有界区间J的连续函数列,且一致收敛,$ \varphi:J\to R $连续
+
+$\left.a\right)$:$ (\varphi\circ f_n)_{n\in\mathbb{N}} $不一定一致连续
+
+$\left.b\right)$:若J为闭区间，则$ (\varphi\circ f_n)_{n\in\mathbb{N}} $一致连续
+
+2.\textbf{Dini第一定理}：设K为有限维向量空间中的一个紧集,$ (f_n)_{n\in \mathbb{N}} $是一个递增的函数列，其中$ f_n\in C(K,\mathbb{R}) $,
+证明：若$ (f_n)_{n\in \mathbb{N}} $收敛于$ f $，则此收敛为一致收敛
+
+3.\textbf{Dini第二定理}：设$ (f_n)_{n\in \mathbb{N}} $是一个[a,b]上的实函数列，且收敛于[a,b]上连续的函数$ f $，设$ f_n$在[a,b]上递增，证明$ (f_n)_{n\in \mathbb{N}} $一致收敛到$ f $
+
+
+\subsection{}\noindent
+1.设$E \subset \mathbb{R} $可数，$ f_n:E\to \mathbb{R} \quad \vert f_n(x)\vert<1\ \forall x\in E$
+
+求证：存在子列$ f_{n_k}\to f \ in\ E$简单收敛
+
+2.设$(f_n)$为$ [0,1] $上有界函数列，且对任意的n,$ f_n $在$ [0,1] $上单调递增
+
+求证：存在简单收敛的子列
+
+3.设$ f $为在$ \mathbb{R} $连续的、以1为周期的函数,$ a\in (0,1) $
+
+$\left.a\right) $求证：$ g(x)=\sum\limits_{n=0}^\infty a^nf(2^n a) $也是连续的周期为1的函数
+
+$\left.b\right) $设$ f $为Lipschitz,即$ \exists k $,$ \vert f(x)-f(y)\vert < k\vert x-y\vert $ 
+
+求证：$ g $为Holder,即$ \exists\alpha\in(0,1] ,C\in \mathbb{R}^+$,s.t.$ \vert g(x)-g(y)\vert < C\vert x-y\vert^\alpha  $
+
+\subsection{}\noindent
+1.Blashke selection Thm
+
+
+Hausdorff distance $\quad X,Y\subset\mathbb{R}^n \quad d_H(X,Y)=\inf\{\epsilon> 0,X\subseteq Y_\epsilon\ Y\subseteq X_\epsilon \} $，其中$ X_\epsilon=\bigcup\limits_{x\in X} B(x,\epsilon) $
+
+给定$ 0<r<R<+\infty\quad$,设$ D_k$为$ \mathbb{R}^n $中的一列凸集,且$ \exists z_k\in D_k\ $有界, $ s.t.\ B_r(z_k)\subset D_k\subset B_R(z_k) $
+
+求证：存在$ D_k $的子列$ D_{k_j}\to D $,即$ d_H(D_{k_j},D)\to 0(j\to\infty) $
+
+2.矩阵的收敛
+
+$ A_k=(a_{i,j}^k)_{1\le i,j\le n}\ \ A=(a_{i,j}) \in M_n(\mathbb{K})$
+
+ Def:$ A_k\to A\Leftrightarrow a_{i,j}^k\to a_{i,j}(k\to \infty) \ \forall i,j $
+
+ $ A_k=(a_{i,j}^k(t))_{1\le i,j\le n}\ \ A=(a_{i,j}(t)) t\in [a,b]$
+
+ Def:$ A_k\rightrightarrows A\Leftrightarrow a_{i,j}^k(t)\rightrightarrows a_{i,j}(t)(k\to \infty) \ \forall i,j $
+
+Einstein notation
+
+ $ A(t)=(a_{i,j(t)}) ,A^{-1}(t)=(a^{i,j}(t))$
+
+ 证明：$ \frac{d\ a^{i,j}(t)}{dt}=\sum\limits_{k,s}-a^{i,k}\frac{d\ a_{k,s}}{dt}a^{s,j} $即$ (A^{-1})'=-(A^{-1})\cdot A'\cdot A^{-1} $
+
+3.$ A,B\in M_n(\mathbb{R}) $
+
+ 定义$ e^A=I+A+\frac{1}{2!}A^2\cdots\quad $验证此定义的合理性
+
+ 求证：$ \frac{d}{dt}(e^{A+tB})(0)=\int_{0}^{1}e^{(1-s)A}Be^{sA}ds $
+
+4.设$ \sum A_k\ \sum B_k $一致收敛，求证：$ \bigg(\sum\limits_{k=0}^\infty A_k \bigg)D\bigg(\sum\limits_{\ell=0}^\infty B_\ell \bigg)=\sum\limits_{m=0}^\infty\sum\limits_{k+l=m}A_kDB_l $
+
+
+
+
+\end{document}
